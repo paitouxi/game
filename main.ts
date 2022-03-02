@@ -184,7 +184,7 @@ enum IrProtocol {
 /**
  * Custom blocks
  */
-//% weight=100 color=#00CCFF icon="\uf2c5" block="PTX海客智能套件"
+//% weight=100 color=#00CCFF icon="\uf2c5" block="海客智能套件"
 //% groups='["主机", "电机", "蜂鸣器", "RGB彩灯", "超声波", "红外避障", "光敏", "温湿度", "旋钮", "声音", "碰撞", "循迹", "按键", "摇杆", "红外接收"]'
 namespace hicbit {
     /*
@@ -631,34 +631,7 @@ namespace hicbit {
     export function playMelody_PTX(pin: RockerEnum, melody: string, tempo: number) {
         music.playMelody(melody, tempo)
     }
-    /*
-    export function playMelody_PTX(pin: RockerEnum, melody: string, tempo: number) {
-        let beatsPerMinute: number = 120;
-        melody = melody || "";
-        if (beatsPerMinute <= 0) beatsPerMinute = 120;
-        if (tempo > 0) {
-            beatsPerMinute = Math.max(1, tempo);
-        }
-        let notes: string[] = melody.split(" ").filter(n => !!n);
-        let newOctave = false;
-
-        // build melody string, replace '-' with 'R' and add tempo
-        // creates format like "C5-174 B4 A G F E D C "
-        for (let i = 0; i < notes.length; i++) {
-            if (notes[i] === "-") {
-                notes[i] = "R";
-            } else if (notes[i] === "C5") {
-                newOctave = true;
-            } else if (newOctave) { // change the octave if necesary
-                notes[i] += "4";
-                newOctave = false;
-            }
-        }
-
-        music.startMelody(notes, MelodyOptions.Once)
-        control.waitForEvent(MICROBIT_MELODY_ID, INTERNAL_MELODY_ENDED);
-    }
-    */
+    
     //% weight=90 block="蜂鸣器|接口%pin|%act"
     //% group="蜂鸣器"
     //% color=#B22222
@@ -805,9 +778,9 @@ namespace hicbit {
         control.waitMicros(10);
         pins.digitalWritePin(trig, 0);
         //dist = pins.pulseIn(echo, PulseValue.High, 300 * 58); //read pulse该方法准确性不高
-        let begintime = input.runningTimeMicros();
+        let starttime = input.runningTimeMicros();
         while (pins.digitalReadPin(echo) == 0) {
-            if ((input.runningTimeMicros() - begintime) > 500) return 300; //未检测到传感器
+            if ((input.runningTimeMicros() - starttime) > 500) return 300; //未检测到传感器
         }
         basic.pause(100);
         //第二次测距
@@ -817,19 +790,14 @@ namespace hicbit {
         pins.digitalWritePin(trig, 1);
         control.waitMicros(10);
         pins.digitalWritePin(trig, 0);
-
-        //begintime = input.runningTimeMicros();
-        //while (pins.digitalReadPin(echo) == 0) {
-        //    if ((input.runningTimeMicros() - begintime) >  300 * 58) return 300; //未检测到传感器
-        //}
-        while (pins.digitalReadPin(echo) == 0);
-        let starttime = input.runningTimeMicros();
-
-        //begintime = input.runningTimeMicros();
-        //while (pins.digitalReadPin(echo) == 1) {
-        //    if ((input.runningTimeMicros() - begintime) > 300 * 58) return 300; //未检测到传感器
-        //}
-        while (pins.digitalReadPin(echo) == 1);
+        starttime = input.runningTimeMicros();
+        while (pins.digitalReadPin(echo) == 0){
+            if ((input.runningTimeMicros() - starttime) > 50000) return 300; //超过50ms代表未检测到传感器
+        }
+        starttime = input.runningTimeMicros();   //从现在开始计时
+        while (pins.digitalReadPin(echo) == 1){
+            if ((input.runningTimeMicros() - starttime) > 50000) return 300; //超过50ms代表未检测到传感器
+        }
         let endtime = input.runningTimeMicros();
         dist = Math.idiv((endtime - starttime), 58);
         if (dist > 300) dist = 0;
