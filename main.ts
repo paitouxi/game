@@ -621,7 +621,7 @@ namespace hicbit {
      * @param tempo - number in beats per minute (bpm), dictating how long each note will play for
      */
     //% block="蜂鸣器|接口%pin|play melody $melody at tempo $tempo|(bpm)" blockId=playMelody_PTX
-    //% weight=85 blockGap=8 help=music/play-melody
+    //  //% weight=85 blockGap=8 help=music/play-melody
     //% melody.shadow="melody_editor"
     //% tempo.min=40 tempo.max=500
     //% tempo.defl=120
@@ -629,7 +629,7 @@ namespace hicbit {
     //% group="蜂鸣器"
     //% color=#B22222
     export function playMelody_PTX(pin: RockerEnum, melody: string, tempo: number) {
-        music.playMelody(melody, 120)
+        music.playMelody(melody, tempo)
     }
     /*
     export function playMelody_PTX(pin: RockerEnum, melody: string, tempo: number) {
