@@ -620,8 +620,8 @@ namespace hicbit {
      * @param melody - string of up to eight notes [C D E F G A B C5] or rests [-] separated by spaces, which will be played one at a time, ex: "E D G F B A C5 B "
      * @param tempo - number in beats per minute (bpm), dictating how long each note will play for
      */
-    //% block="蜂鸣器|接口%pin|play melody $melody at tempo $tempo|(bpm)" blockId=playMelody_PTX
-    //  //% weight=85 blockGap=8 help=music/play-melody
+    //% block="蜂鸣器|接口%pin|播放旋律 $melody 以速度 $tempo|(拍速)"   //blockId=playMelody_PTX
+    //% weight=85 blockGap=8 help=music/play-melody
     //% melody.shadow="melody_editor"
     //% tempo.min=40 tempo.max=500
     //% tempo.defl=120
