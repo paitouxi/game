@@ -1292,73 +1292,29 @@ namespace hicbit {
     //% blue.min=0 blue.max=255
     //% color=#CD9B9B
     export function SetRGBLight(pin: SensorEnum, light: LEDEnum, red: number, green: number, blue: number) {
+        if (light == 3){
+            for (let LEDNum = 0; LEDNum < 3; LEDNum++) {
+                strip[LEDNum * 3 + 0] = green;
+                strip[LEDNum * 3 + 1] = red;
+                strip[LEDNum * 3 + 2] = blue;
+            } 
+        } else {
+              strip[light * 3 + 0] = green;
+              strip[light * 3 + 1] = red;
+              strip[light * 3 + 2] = blue;
+        }
         switch (pin) {
             case SensorEnum.portA:
-                if (light == 3)
-                {
-                    for (let LEDNum = 0; LEDNum < 3; LEDNum++) {
-                        strip[LEDNum * 3 + 0] = green;
-                        strip[LEDNum * 3 + 1] = red;
-                        strip[LEDNum * 3 + 2] = blue;
-                        
-                    }
-                } else {
-                    strip[light * 3 + 0] = green;
-                    strip[light * 3 + 1] = red;
-                    strip[light * 3 + 2] = blue;
-                }
                 sendBuffer(strip, DigitalPin.P0);
                 break;
             case SensorEnum.portB:
-                if (light == 3)
-                {
-                    for (let LEDNum = 0; LEDNum < 3; LEDNum++) {
-                        strip[LEDNum * 3 + 0] = green;
-                        strip[LEDNum * 3 + 1] = red;
-                        strip[LEDNum * 3 + 2] = blue;
-                        sendBuffer(strip, DigitalPin.P13);
-                        basic.pause(20);
-                    }
-                } else {
-                    strip[light * 3 + 0] = green;
-                    strip[light * 3 + 1] = red;
-                    strip[light * 3 + 2] = blue;
-                    sendBuffer(strip, DigitalPin.P13);
-                }
+                sendBuffer(strip, DigitalPin.P13);
                 break;
             case SensorEnum.portC:
-                if (light == 3)
-                {
-                    for (let LEDNum = 0; LEDNum < 3; LEDNum++) {
-                        strip[LEDNum * 3 + 0] = green;
-                        strip[LEDNum * 3 + 1] = red;
-                        strip[LEDNum * 3 + 2] = blue;
-                        sendBuffer(strip, DigitalPin.P14);
-                        basic.pause(20);
-                    }
-                } else {
-                    strip[light * 3 + 0] = green;
-                    strip[light * 3 + 1] = red;
-                    strip[light * 3 + 2] = blue;
-                    sendBuffer(strip, DigitalPin.P14);
-                }
+                sendBuffer(strip, DigitalPin.P14);
                 break;
             case SensorEnum.portD:
-                if (light == 3)
-                {
-                    for (let LEDNum = 0; LEDNum < 3; LEDNum++) {
-                        strip[LEDNum * 3 + 0] = green;
-                        strip[LEDNum * 3 + 1] = red;
-                        strip[LEDNum * 3 + 2] = blue;
-                        sendBuffer(strip, DigitalPin.P15);
-                        basic.pause(20);
-                    }
-                } else {
-                    strip[light * 3 + 0] = green;
-                    strip[light * 3 + 1] = red;
-                    strip[light * 3 + 2] = blue;
-                    sendBuffer(strip, DigitalPin.P15);
-                }
+                sendBuffer(strip, DigitalPin.P15);
                 break;
         }
         basic.pause(20);
