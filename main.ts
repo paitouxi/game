@@ -780,7 +780,7 @@ namespace hicbit {
         //dist = pins.pulseIn(echo, PulseValue.High, 300 * 58); //read pulse该方法准确性不高
         let starttime = input.runningTimeMicros();
         while (pins.digitalReadPin(echo) == 0) {
-            if ((input.runningTimeMicros() - starttime) > 30000) return 300; //未检测到传感器
+            if ((input.runningTimeMicros() - starttime) > 30000) return 300; //超过30ms代表未检测到传感器,最小为300 * 58微秒，300的单位是毫米。
         }
         basic.pause(100);
         //第二次测距
@@ -791,29 +791,24 @@ namespace hicbit {
         control.waitMicros(10);
         pins.digitalWritePin(trig, 0);
         starttime = input.runningTimeMicros();
-        let temp = 0;
-        let temp1 = 0;
+        let temp = 0;   //用这个变量来减少频繁调用input.runningTimeMicros()函数带来的误差。
         while (pins.digitalReadPin(echo) == 0){
             temp++;
-            if(temp > 1000){
+            if (temp > 2000){
                temp = 0;
-               temp1 = input.runningTimeMicros();
-               if ((temp1 - starttime) > 30000) return 300; //超过30ms代表未检测到传感器
+               if ((input.runningTimeMicros() - starttime) > 30000) return 300; //超过30ms代表未检测到传感器
             }
-            
         }
         temp = 0;
         starttime = input.runningTimeMicros();   //从现在开始计时
         while (pins.digitalReadPin(echo) == 1){
             temp++;
-            if(temp > 1000){
+            if (temp > 2000){
                temp = 0;
-               temp1 = input.runningTimeMicros();
-               if ((temp1 - starttime) > 30000) return 300; //超过30ms代表未检测到传感器
+               if ((input.runningTimeMicros() - starttime) > 30000) return 300; //超过30ms代表未检测到传感器
             }
         }
-        let endtime = input.runningTimeMicros();
-        dist = Math.idiv((endtime - starttime), 58);
+        dist = Math.idiv((input.runningTimeMicros() - starttime), 58);
         if (dist > 300) dist = 0;
         return dist;
     }
