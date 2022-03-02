@@ -790,20 +790,30 @@ namespace hicbit {
         pins.digitalWritePin(trig, 1);
         control.waitMicros(10);
         pins.digitalWritePin(trig, 0);
-        /*starttime = input.runningTimeMicros();
-        let temp: number;
+        starttime = input.runningTimeMicros();
+        let temp = 0;
+        let temp1 = 0;
         while (pins.digitalReadPin(echo) == 0){
-            temp =  input.runningTimeMicros();
-            if ((temp - starttime) > 30000) return 300; //超过30ms代表未检测到传感器
+            temp++;
+            if(temp > 1000){
+               temp = 0;
+               temp1 = input.runningTimeMicros();
+               if ((temp1 - starttime) > 30000) return 300; //超过30ms代表未检测到传感器
+            }
+            
         }
-        starttime = temp;   //从现在开始计时
+        temp = 0;
+        starttime = input.runningTimeMicros();   //从现在开始计时
         while (pins.digitalReadPin(echo) == 1){
-            temp =  input.runningTimeMicros();
-            if ((temp - starttime) > 30000) return 300; //超过30ms代表未检测到传感器
+            temp++;
+            if(temp > 1000){
+               temp = 0;
+               temp1 = input.runningTimeMicros();
+               if ((temp1 - starttime) > 30000) return 300; //超过30ms代表未检测到传感器
+            }
         }
-        */
-        dist = pins.pulseIn(echo, PulseValue.High, 300 * 58); 
-        dist = Math.idiv(dist, 58);
+        let endtime = input.runningTimeMicros();
+        dist = Math.idiv((endtime - starttime), 58);
         if (dist > 300) dist = 0;
         return dist;
     }
