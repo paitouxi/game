@@ -182,7 +182,7 @@ enum IrProtocol {
 /**
  * Custom blocks
  */
-//% weight=100 color=#00CCFF icon="\uf2c5" block="海客智能套件"
+//% weight=100 color=#00CCFF icon="\uf2c5" block="PTX海客智能套件"
 //% groups='["主机", "电机", "蜂鸣器", "RGB彩灯", "超声波", "红外避障", "光敏", "温湿度", "旋钮", "声音", "碰撞", "循迹", "按键", "摇杆", "红外接收"]'
 namespace hicbit {
     /*
