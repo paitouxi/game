@@ -1292,9 +1292,13 @@ namespace hicbit {
     //% blue.min=0 blue.max=255
     //% color=#CD9B9B
     export function SetRGBLight(pin: SensorEnum, light: LEDEnum, red: number, green: number, blue: number) {
+        if(light == 3)
+        {}
+        else{
         strip[light * 3 + 0] = green;
         strip[light * 3 + 1] = red;
         strip[light * 3 + 2] = blue;
+        }
         switch (pin) {
             case SensorEnum.portA:
                 if (light == 3)
