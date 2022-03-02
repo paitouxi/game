@@ -84,6 +84,8 @@ enum LEDEnum {
     led2 = 1,
     //% block="3"
     led3 = 2,
+    //% block="全部"
+    led_all = 3,
 }
 
 enum Dht11Result {
@@ -1295,15 +1297,91 @@ namespace hicbit {
         strip[light * 3 + 2] = blue;
         switch (pin) {
             case SensorEnum.portA:
+                if (light == 3)
+                {
+                   strip[0 * 3 + 0] = green;
+                   strip[0 * 3 + 1] = red;
+                   strip[0 * 3 + 2] = blue;
+                   sendBuffer(strip, DigitalPin.P0);
+                   basic.pause(20);
+                   strip[1 * 3 + 0] = green;
+                   strip[1 * 3 + 1] = red;
+                   strip[1 * 3 + 2] = blue;
+                   sendBuffer(strip, DigitalPin.P0);
+                   basic.pause(20);
+                   strip[2 * 3 + 0] = green;
+                   strip[2 * 3 + 1] = red;
+                   strip[2 * 3 + 2] = blue;
+                   sendBuffer(strip, DigitalPin.P0);
+                   basic.pause(20);
+                }
+                else
                 sendBuffer(strip, DigitalPin.P0);
                 break;
             case SensorEnum.portB:
+                if (light == 3)
+                {
+                   strip[0 * 3 + 0] = green;
+                   strip[0 * 3 + 1] = red;
+                   strip[0 * 3 + 2] = blue;
+                   sendBuffer(strip, DigitalPin.P0);
+                   basic.pause(20);
+                   strip[1 * 3 + 0] = green;
+                   strip[1 * 3 + 1] = red;
+                   strip[1 * 3 + 2] = blue;
+                   sendBuffer(strip, DigitalPin.P0);
+                   basic.pause(20);
+                   strip[2 * 3 + 0] = green;
+                   strip[2 * 3 + 1] = red;
+                   strip[2 * 3 + 2] = blue;
+                   sendBuffer(strip, DigitalPin.P0);
+                   basic.pause(20);
+                }
+                else
                 sendBuffer(strip, DigitalPin.P13);
                 break;
             case SensorEnum.portC:
+                if (light == 3)
+                {
+                   strip[0 * 3 + 0] = green;
+                   strip[0 * 3 + 1] = red;
+                   strip[0 * 3 + 2] = blue;
+                   sendBuffer(strip, DigitalPin.P0);
+                   basic.pause(20);
+                   strip[1 * 3 + 0] = green;
+                   strip[1 * 3 + 1] = red;
+                   strip[1 * 3 + 2] = blue;
+                   sendBuffer(strip, DigitalPin.P0);
+                   basic.pause(20);
+                   strip[2 * 3 + 0] = green;
+                   strip[2 * 3 + 1] = red;
+                   strip[2 * 3 + 2] = blue;
+                   sendBuffer(strip, DigitalPin.P0);
+                   basic.pause(20);
+                }
+                else
                 sendBuffer(strip, DigitalPin.P14);
                 break;
             case SensorEnum.portD:
+                if (light == 3)
+                {
+                   strip[0 * 3 + 0] = green;
+                   strip[0 * 3 + 1] = red;
+                   strip[0 * 3 + 2] = blue;
+                   sendBuffer(strip, DigitalPin.P0);
+                   basic.pause(20);
+                   strip[1 * 3 + 0] = green;
+                   strip[1 * 3 + 1] = red;
+                   strip[1 * 3 + 2] = blue;
+                   sendBuffer(strip, DigitalPin.P0);
+                   basic.pause(20);
+                   strip[2 * 3 + 0] = green;
+                   strip[2 * 3 + 1] = red;
+                   strip[2 * 3 + 2] = blue;
+                   sendBuffer(strip, DigitalPin.P0);
+                   basic.pause(20);
+                }
+                else
                 sendBuffer(strip, DigitalPin.P15);
                 break;
         }
