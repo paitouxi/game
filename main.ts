@@ -615,6 +615,41 @@ namespace hicbit {
         return Math.round(adValue);
     }
 
+    /**
+     * Play a melody from the melody editor.
+     * @param melody - string of up to eight notes [C D E F G A B C5] or rests [-] separated by spaces, which will be played one at a time, ex: "E D G F B A C5 B "
+     * @param tempo - number in beats per minute (bpm), dictating how long each note will play for
+     */
+    //% block="蜂鸣器|接口%pin|play melody $melody at tempo $tempo|(bpm)" blockId=playMelody_PTX
+    //% weight=85 blockGap=8 help=music/play-melody
+    //% melody.shadow="melody_editor"
+    //% tempo.min=40 tempo.max=500
+    //% tempo.defl=120
+    //% parts=headphone
+    //% group="蜂鸣器"
+    export function playMelody_PTX(pin: RockerEnum, melody: string, tempo: number) {
+        melody = melody || "";
+        setTempo(tempo);
+        let notes: string[] = melody.split(" ").filter(n => !!n);
+        let newOctave = false;
+
+        // build melody string, replace '-' with 'R' and add tempo
+        // creates format like "C5-174 B4 A G F E D C "
+        for (let i = 0; i < notes.length; i++) {
+            if (notes[i] === "-") {
+                notes[i] = "R";
+            } else if (notes[i] === "C5") {
+                newOctave = true;
+            } else if (newOctave) { // change the octave if necesary
+                notes[i] += "4";
+                newOctave = false;
+            }
+        }
+
+        music.startMelody(notes, MelodyOptions.Once)
+        control.waitForEvent(MICROBIT_MELODY_ID, INTERNAL_MELODY_ENDED);
+    }
+    
     //% weight=90 block="蜂鸣器|接口%pin|%act"
     //% group="蜂鸣器"
     //% color=#B22222
