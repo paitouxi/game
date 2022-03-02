@@ -628,8 +628,16 @@ namespace hicbit {
     //% parts=headphone
     //% group="蜂鸣器"
     export function playMelody_PTX(pin: RockerEnum, melody: string, tempo: number) {
+        music.playMelody(melody, 120)
+    }
+    /*
+    export function playMelody_PTX(pin: RockerEnum, melody: string, tempo: number) {
+        let beatsPerMinute: number = 120;
         melody = melody || "";
-        setTempo(tempo);
+        if (beatsPerMinute <= 0) beatsPerMinute = 120;
+        if (tempo > 0) {
+            beatsPerMinute = Math.max(1, tempo);
+        }
         let notes: string[] = melody.split(" ").filter(n => !!n);
         let newOctave = false;
 
@@ -649,7 +657,7 @@ namespace hicbit {
         music.startMelody(notes, MelodyOptions.Once)
         control.waitForEvent(MICROBIT_MELODY_ID, INTERNAL_MELODY_ENDED);
     }
-    
+    */
     //% weight=90 block="蜂鸣器|接口%pin|%act"
     //% group="蜂鸣器"
     //% color=#B22222
