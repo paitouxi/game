@@ -627,6 +627,7 @@ namespace hicbit {
     //% tempo.defl=120
     //% parts=headphone
     //% group="蜂鸣器"
+    //% color=#B22222
     export function playMelody_PTX(pin: RockerEnum, melody: string, tempo: number) {
         music.playMelody(melody, 120)
     }
