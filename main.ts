@@ -630,7 +630,7 @@ namespace hicbit {
     //% group="蜂鸣器"
     //% color=#B22222
     export function playMelody_PTX(pin: RockerEnum, melody: string, tempo: number) {
-        music.playMelody(melody, tempo)
+        music_ptx.playMelody(melody, tempo)
     }
     
     //% weight=80 block="蜂鸣器|接口%pin|%act"
