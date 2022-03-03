@@ -146,9 +146,9 @@ namespace music_ptx {
     //% blockId=device_builtin_melody block="%melody"
     //% blockHidden=true
     //% group="Melody Advanced"
-    export function builtInMelody(melody: Melodies): string[] {
-        return getMelody(melody);
-    }
+   // export function builtInMelody(melody: Melodies): string[] {   //因为报错，所以注释掉。
+   //     return getMelody(melody);
+   // }
 
     /**
      * Registers code to run on various melody events
