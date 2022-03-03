@@ -630,7 +630,7 @@ namespace hicbit {
     //% group="蜂鸣器"
     //% color=#B22222
     export function playMelody_PTX(pin: RockerEnum, melody: string, tempo: number) {
-        music_ptx.playMelody(melody, tempo)   //paitouxi修改：改为自修改的music_ptx文件，以便更改为非P0、P1、P2管脚
+        music_ptx.playMelody(melody, tempo);   //paitouxi修改：改为自修改的music_ptx文件，以便更改为非P0、P1、P2管脚
       
     }
     
