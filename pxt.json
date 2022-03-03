@@ -12,6 +12,8 @@
         "README.md",
         "main.blocks",
         "main.ts",
+        "musicptx.ts",
+        "pins_ptx.cpp",
         "sendBuffer.asm",
         "setBufferMode.asm"
     ],
