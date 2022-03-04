@@ -26,7 +26,7 @@ namespace music_ptx {
     export function playTone(frequency: number, ms: number): void {
         if (_playTone) _playTone(frequency, ms);
         else {
-            pins.set_audio_pin(AnalogPin.P14);
+            pins.setAudioPin(AnalogPin.P14);
             pins.analogPitch(frequency, ms);  
         }     //paitouxi修改：改为自修改的pins_ptx文件，以便更改为非P0、P1、P2管脚
     }
