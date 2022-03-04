@@ -1,4 +1,3 @@
-//% blockHidden=true
 namespace music_ptx {
     const INTERNAL_MELODY_ENDED = 5;
 
