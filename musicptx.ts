@@ -23,6 +23,7 @@ namespace music_ptx {
     //% parts="headphone"
     //% useEnumVal=1
     //% group="Tone"
+    //% blockHidden=true
     export function playTone(frequency: number, ms: number): void {
         if (_playTone) _playTone(frequency, ms);
         else pins_ptx.analogPitch(frequency, ms);    //paitouxi修改：改为自修改的pins_ptx文件，以便更改为非P0、P1、P2管脚
@@ -37,6 +38,7 @@ namespace music_ptx {
     //% parts="headphone"
     //% useEnumVal=1
     //% group="Tone"
+    //% blockHidden=true
     export function ringTone(frequency: number): void {
         playTone(frequency, 0);
     }
@@ -49,6 +51,7 @@ namespace music_ptx {
     //% blockId=device_rest block="rest(ms)|%duration=device_beat"
     //% parts="headphone"
     //% group="Tone"
+    //% blockHidden=true
     export function rest(ms: number): void {
         playTone(0, ms);
     }
@@ -66,6 +69,7 @@ namespace music_ptx {
     //% useEnumVal=1
     //% group="Tone"
     //% blockGap=8
+    //% blockHidden=true
     export function noteFrequency(name: Note): number {
         return name;
     }
@@ -81,6 +85,7 @@ namespace music_ptx {
     //% blockId=device_beat block="%fraction|beat"
     //% group="Tempo"
     //% blockGap=8
+    //% blockHidden=true
     export function beat(fraction?: BeatFraction): number {
         init();
         if (fraction == null) fraction = BeatFraction.Whole;
@@ -102,6 +107,7 @@ namespace music_ptx {
     //% help=music/tempo weight=40
     //% blockId=device_tempo block="tempo (bpm)" blockGap=8
     //% group="Tempo"
+    //% blockHidden=true
     export function tempo(): number {
         init();
         return beatsPerMinute;
@@ -115,6 +121,7 @@ namespace music_ptx {
     //% blockId=device_change_tempo block="change tempo by (bpm)|%value" blockGap=8
     //% group="Tempo"
     //% weight=100
+    //% blockHidden=true
     export function changeTempoBy(bpm: number): void {
         init();
         setTempo(beatsPerMinute + bpm);
@@ -129,6 +136,7 @@ namespace music_ptx {
     //% bpm.min=4 bpm.max=400
     //% group="Tempo"
     //% weight=99
+    //% blockHidden=true
     export function setTempo(bpm: number): void {
         init();
         if (bpm > 0) {
@@ -147,6 +155,7 @@ namespace music_ptx {
     //% blockId=device_builtin_melody block="%melody"
     //% blockHidden=true
     //% group="Melody Advanced"
+    //% blockHidden=true
    // export function builtInMelody(melody: Melodies): string[] {   //因为报错，所以注释掉。
    //     return getMelody(melody);
    // }
@@ -157,6 +166,7 @@ namespace music_ptx {
     //% blockId=melody_on_event block="music on %value"
     //% help=music/on-event weight=59 blockGap=32
     //% group="Melody Advanced"
+    //% blockHidden=true
     export function onEvent(value: MusicEvent, handler: () => void) {
         control.onEvent(MICROBIT_MELODY_ID, value, handler);
     }
@@ -167,6 +177,7 @@ namespace music_ptx {
     //% hidden=1 deprecated=1
     //% parts="headphone"
     //% group="Melody Advanced"
+    //% blockHidden=true
     export function beginMelody(melodyArray: string[], options: MelodyOptions = 1) {
         return startMelody(melodyArray, options);
     }
@@ -181,6 +192,7 @@ namespace music_ptx {
     //% blockId=device_start_melody block="start melody %melody=device_builtin_melody| repeating %options"
     //% parts="headphone"
     //% group="Melody Advanced"
+    //% blockHidden=true
     export function startMelody(melodyArray: string[], options: MelodyOptions = 1) {
         init();
         if (currentMelody != undefined) {
@@ -232,6 +244,7 @@ namespace music_ptx {
     //% tempo.defl=120
     //% parts=headphone
     //% group="Melody"
+    //% blockHidden=true
     export function playMelody(melody: string, tempo: number) {
         melody = melody || "";
         setTempo(tempo);
@@ -269,6 +282,7 @@ namespace music_ptx {
     //% melody.fieldOptions.onParentBlock="true"
     //% shim=TD_ID
     //% group="Melody"
+    //% blockHidden=true
     export function melodyEditor(melody: string): string {
         return melody;
     }
@@ -281,6 +295,7 @@ namespace music_ptx {
     //% blockId=device_stop_melody block="stop melody $options"
     //% parts="headphone"
     //% group="Melody Advanced"
+    //% blockHidden=true
     export function stopMelody(options: MelodyStopOptions) {
         if (options & MelodyStopOptions.Background)
             startMelody([], MelodyOptions.OnceInBackground);
@@ -295,6 +310,7 @@ namespace music_ptx {
     //% blockId=music_stop_all_sounds block="stop all sounds"
     //% weight=10
     //% group="Volume"
+    //% blockHidden=true
     export function stopAllSounds() {
         rest(0);
         stopMelody(MelodyStopOptions.All);
@@ -308,6 +324,7 @@ namespace music_ptx {
     //% help=music/set-play-tone
     //% advanced=true
     //% group="Tone"
+    //% blockHidden=true
     export function setPlayTone(f: (frequency: number, duration: number) => void) {
         _playTone = f;
     }
