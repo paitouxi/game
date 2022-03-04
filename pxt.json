@@ -13,7 +13,6 @@
         "main.blocks",
         "main.ts",
         "musicptx.ts",
-        "pins_ptx.ts",
         "sendBuffer.asm",
         "setBufferMode.asm"
     ],
