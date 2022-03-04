@@ -28,7 +28,7 @@ namespace music_ptx {
         else {
             pins.setAudioPin(AnalogPin.P14);
             pins.analogPitch(frequency, ms);  
-        }     //paitouxi修改：改为自修改的pins_ptx文件，以便更改为非P0、P1、P2管脚
+        }     //paitouxi修改：改为自修改的pins_ptx文件，以便更改为非P0、P1、P2管脚 
     }
 
     /**
