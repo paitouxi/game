@@ -630,7 +630,7 @@ namespace hicbit {
     //% group="蜂鸣器"
     //% color=#B22222
     export function playMelody_PTX(pin: SensorEnum, melody: string, tempo: number) {
-        Switch (pin){
+        switch (pin){
             case SensorEnum.portA:
                 pins.setAudioPin(AnalogPin.P0);
                 break;
