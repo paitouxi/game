@@ -629,9 +629,22 @@ namespace hicbit {
     //% parts=headphone
     //% group="蜂鸣器"
     //% color=#B22222
-    export function playMelody_PTX(pin: RockerEnum, melody: string, tempo: number) {
-        music_ptx.playMelody(melody, tempo);   //paitouxi修改：改为自修改的music_ptx文件，以便更改为非P0、P1、P2管脚
-
+    export function playMelody_PTX(pin: SensorEnum, melody: string, tempo: number) {
+        Switch (pin){
+            case SensorEnum.portA:
+                pins.setAudioPin(AnalogPin.P0);
+                break;
+            case SensorEnum.portB:
+                pins.setAudioPin(AnalogPin.P13);
+                break;
+            case SensorEnum.portC:
+                pins.setAudioPin(AnalogPin.P14);
+                break;
+            case SensorEnum.portD:
+                pins.setAudioPin(AnalogPin.P15);
+                break;   
+        }
+        music.playMelody(melody, tempo);   //paitouxi修改：改为自修改的music_ptx文件，以便更改为非P0、P1、P2管脚
     }
 
     //% weight=80 block="蜂鸣器|接口%pin|%act"
