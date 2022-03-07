@@ -644,7 +644,7 @@ namespace hicbit {
                 pins.setAudioPin(AnalogPin.P15);
                 break;   
         }
-        music.playMelody(melody, tempo);   //paitouxi修改：改为自修改的music_ptx文件，以便更改为非P0、P1、P2管脚
+        music.playMelody(melody, tempo);   
     }
 
     //% weight=80 block="蜂鸣器|接口%pin|%act"
@@ -686,15 +686,7 @@ namespace hicbit {
                 ADCPin = AnalogPin.P4;
                 break;
         }
-        /* let n = 1000;  //检测了1000次
-         let max = 0;
-         let adValue = 0;
-         for (let i = 0; i < n; i++) {
-             let adValue = pins.analogReadPin(ADCPin);
-             if (adValue > max) max = adValue;
-         }
-         */
-        let max = pins.analogReadPin(ADCPin); //原来上面检测了1000次，现在改为1次
+        let max = pins.analogReadPin(ADCPin);
         return Math.round(max * 255 / 1023);
     }
 
@@ -806,7 +798,7 @@ namespace hicbit {
         control.waitMicros(10);
         pins.digitalWritePin(trig, 0);
         starttime = input.runningTimeMicros();
-        let temp = 0;   //用这个变量来减少频繁调用input.runningTimeMicros()函数带来的误差。
+        let temp = 0;   
         while (pins.digitalReadPin(echo) == 0) {
             temp++;
             if (temp > 2000) {
@@ -815,7 +807,7 @@ namespace hicbit {
             }
         }
         temp = 0;
-        starttime = input.runningTimeMicros();   //从现在开始计时
+        starttime = input.runningTimeMicros();   
         while (pins.digitalReadPin(echo) == 1) {
             temp++;
             if (temp > 2000) {
