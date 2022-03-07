@@ -795,7 +795,7 @@ namespace hicbit {
         //dist = pins.pulseIn(echo, PulseValue.High, 300 * 58); //read pulse该方法准确性不高
         let starttime = input.runningTimeMicros();
         while (pins.digitalReadPin(echo) == 0) {
-            if ((input.runningTimeMicros() - starttime) > 30000) return 300; //超过30ms代表未检测到传感器,最小为300 * 58微秒，300的单位是毫米。
+            if ((input.runningTimeMicros() - starttime) > 30000) return 300; //超过30ms代表未检测到传感器
         }
         basic.pause(100);
         //第二次测距
