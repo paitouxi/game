@@ -12,7 +12,6 @@
         "README.md",
         "main.blocks",
         "main.ts",
-        "musicptx.ts",
         "sendBuffer.asm",
         "setBufferMode.asm"
     ],
