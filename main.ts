@@ -852,13 +852,25 @@ namespace hicbit {
         while (pins.digitalReadPin(Dht11Pin) == 1) { //主机拉高等待从机响应
             if ((input.runningTimeMicros() - currenttime) > 100) return 0.1;//未插入退出
         }
-        while (pins.digitalReadPin(Dht11Pin) == 0); //从机拉低
-        while (pins.digitalReadPin(Dht11Pin) == 1); //从机拉高
-
+        currenttime = input.runningTimeMicros();
+        while (pins.digitalReadPin(Dht11Pin) == 0){          //从机拉低
+            if ((input.runningTimeMicros() - currenttime) > 100) return 0.1;//无响应退出
+        }
+        currenttime = input.runningTimeMicros();
+        while (pins.digitalReadPin(Dht11Pin) == 1){          //从机拉高
+            if ((input.runningTimeMicros() - currenttime) > 100) return 0.1;//无响应退出
+        }
         //read data (5 bytes)
         for (let i = 0; i < 40; i++) {
-            while (pins.digitalReadPin(Dht11Pin) == 1);
-            while (pins.digitalReadPin(Dht11Pin) == 0);
+            currenttime = input.runningTimeMicros();
+            while (pins.digitalReadPin(Dht11Pin) == 1){          //从机拉高
+                if ((input.runningTimeMicros() - currenttime) > 100) return 0.1;//无响应退出
+            }
+            currenttime = input.runningTimeMicros();
+            while (pins.digitalReadPin(Dht11Pin) == 0);{         //从机拉低
+                      //从机拉低
+                if ((input.runningTimeMicros() - currenttime) > 100) return 0.1;//无响应退出
+            }
             control.waitMicros(28);
             //if sensor still pull up data pin after 28 us it means 1, otherwise 0
             if (pins.digitalReadPin(Dht11Pin) == 1) dataArray[i] = true;
