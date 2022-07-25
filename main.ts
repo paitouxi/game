@@ -863,11 +863,11 @@ namespace hicbit {
         //read data (5 bytes)
         for (let i = 0; i < 40; i++) {
             currenttime = input.runningTimeMicros();
-            while (pins.digitalReadPin(Dht11Pin) == 0){          //从机拉低
+            while (pins.digitalReadPin(Dht11Pin) == 1){          //从机拉高
                 if ((input.runningTimeMicros() - currenttime) > 100) return 0.1;//无响应退出
             }
             currenttime = input.runningTimeMicros();
-            while (pins.digitalReadPin(Dht11Pin) == 1);{         //从机拉高
+            while (pins.digitalReadPin(Dht11Pin) == 0);{         //从机拉低
                       //从机拉低
                 if ((input.runningTimeMicros() - currenttime) > 100) return 0.1;//无响应退出
             }
